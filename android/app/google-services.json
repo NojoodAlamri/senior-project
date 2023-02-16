@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "162333815505",
+    "project_id": "baltammam-prject",
+    "storage_bucket": "baltammam-prject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162333815505:android:f729254e51e8f87d14cbf0",
+        "android_client_info": {
+          "package_name": "com.example.file_templeate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162333815505-pi5phg52eilj78r5s72uc4ad57fnkgaa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.file_templeate",
+            "certificate_hash": "08e42728d632ba4c1b8496268298d7658e408d0e"
+          }
+        },
+        {
+          "client_id": "162333815505-pfe0acd8ulaqsqvsml93gv1fhl76tefd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsicmUK2V4WkX1IKCgzur7WmHJewWv0vg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162333815505-pfe0acd8ulaqsqvsml93gv1fhl76tefd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
