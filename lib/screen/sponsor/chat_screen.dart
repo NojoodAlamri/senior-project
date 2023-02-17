@@ -62,7 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
         // leading: IconButton(
         //     icon: Icon(Icons.arrow_back),
         //     onPressed: () {
@@ -83,12 +83,14 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
 
       body: SafeArea(
+
         child: Flexible (
+
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               MessageStreamBuilder(),
+
               Container(
                 decoration: BoxDecoration(
                   border: Border(
@@ -98,6 +100,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 ),
+                
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
 
@@ -160,21 +163,24 @@ class MessageStreamBuilder extends StatelessWidget {
           //add her a spinner
         }
 
-        final messages = snapshot.data!.docs.reversed;
-        for (var message in messages) {
-          final Messagetext = message.get('text');
-          final messageSender = message.get('sender');
-          final currentuser = signedInUser.email;
-          if (currentuser == signedInUser) {
-            //the code of the message from the signed in user
+        if(snapshot.data != null) {
+          final messages = snapshot.data!.docs.reversed;
+          for (var message in messages) {
+            final Messagetext = message.get('text');
+            final messageSender = message.get('sender');
+            final currentuser = signedInUser.email;
+            if (currentuser == signedInUser) {
+              //the code of the message from the signed in user
+            }
+            final messageWidget = Messageline(
+              sender: messageSender,
+              text: Messagetext,
+              isme: currentuser == messageSender,
+            );
+            messageWidgets.add(messageWidget);
 
           }
-          final messageWidget = Messageline(
-            sender: messageSender,
-            text: Messagetext,
-            isme: currentuser == messageSender,
-          );
-          messageWidgets.add(messageWidget);
+
         }
         return Expanded(
           child: ListView(
@@ -183,8 +189,8 @@ class MessageStreamBuilder extends StatelessWidget {
             children: messageWidgets,
           ),
         );
-      }),
-      //stream: _firestore.collection('messages').snapshots(),
+      }
+      )
     );
   }
 }

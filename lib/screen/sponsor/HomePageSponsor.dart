@@ -9,8 +9,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../homePage/BottomNavigationBar.dart';
-
 class HomePageSponsor extends StatefulWidget {
   const HomePageSponsor({super.key});
 
@@ -27,29 +25,30 @@ class _HomePageSponsorState extends State<HomePageSponsor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color(0xFF004079),
         elevation: 0,
-        actions: [Visibility(
-          child: IconButton(icon: Icon(Icons.exit_to_app),
-              onPressed: () async{
-               await FirebaseAuth.instance.signOut();
-               Get.to(()=>Signin());
-              },
-          ),
-        )],
         title: Text(
-          'الجهات الراعية',
+          ' ممول الخدمة  ',
         ),
-
-        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.abc),
+          color: Color(0xFF004079),
           onPressed: () {
           },
-          color: Color(0xFF004079),
         ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () async{
+              await FirebaseAuth.instance.signOut();
+              Get.to(()=>Signin());
 
+            },
+          ),
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _usersStreamPackage,
@@ -60,79 +59,78 @@ class _HomePageSponsorState extends State<HomePageSponsor> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
           }
-          return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                
-                crossAxisCount: 1,
-              ),
+          return ListView.builder(
+
+
               scrollDirection: Axis.vertical,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int i) {
                 return InkWell(
-
                   onTap: () {
                     Get.to(() => ChatScreen(
-                        //data: snapshot.data!.docs[i],
-                        //ID_Doc:snapshot.data!.docs[i].id
-                        ));
+                      //data: snapshot.data!.docs[i],
+                      //ID_Doc:snapshot.data!.docs[i].id
+                    ));
                   },
-                  child: ListView(
-                    padding: const EdgeInsets.all(8),
+                  child: Container(
 
-                    children: [
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color:  Color(0xFF869aaf).withOpacity(0.2) ,
+                        borderRadius:BorderRadius.circular(25),
+                        // border: Border.all(
+                        //     color:  Color(0xFF869aaf).withOpacity(0.2) ,
+                        //     width: 3
+                        // )
+                    ),
+                    child: Column(
 
-                GridTile(
-                        child: ListTile(
-                          tileColor: Colors.black12,
+                      children: [
+                        ListTile(
                           title: Text(
                             textDirection: TextDirection.rtl,
-                            "الإسم:${snapshot.data!.docs[i]["username"]}",
+                            "الاسم: ${snapshot.data!.docs[i]["username"]}",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                            ),
                           ),
                           leading: Icon(
                             Icons.person,
-                            color: Colors.blue,
+                            color: Color(0xFF004079),
                           ),
                         ),
-                      ),
-
-                      GridTile(
-                        child: ListTile(
-                          tileColor: Colors.black12,
+                        ListTile(
                           title: Text(
                             textDirection: TextDirection.rtl,
-                            "البريد الالكتروني:    ${snapshot.data!.docs[i]["email"]}",
+                            "الايميل: ${snapshot.data!.docs[i]["email"]}",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                            ),
+                          ),
+                          leading: Icon(
+                            Icons.email,
+                            color: Color(0xFF004079),
+                          ),
+                        ),
+                        ListTile(
+                          title: Text(
+                            textDirection: TextDirection.rtl,
+                            "تواصل  ",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
                           leading: Icon(
-                            Icons.email,
-                            color: Colors.blue,
+                            Icons.chat_outlined,
+                            color: Color(0xFF004079),
                           ),
                         ),
-                      ),
-                      ListTile(
-                        tileColor: Colors.black12,
-                        title: Text(
-                          textDirection: TextDirection.rtl,
-                          "تواصل  ",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        leading: Icon(
-                          Icons.chat_outlined,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ],
-                  )
+                      ],
+                    ),
+                  ),
                 );
               });
         },
