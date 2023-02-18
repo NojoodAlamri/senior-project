@@ -161,7 +161,7 @@ class _HomePagePackageState extends State<HomePagePackage> {
                   if (data['name']
                       .toString()
                       .toLowerCase()
-                      .startsWith(name.toLowerCase())) {
+                      .contains(name.toLowerCase())) {
                      return InkWell(
                     onTap: () {
                       Get.to(() => DetailsForUser(

@@ -23,52 +23,44 @@ class HomePageService extends StatefulWidget {
 }
 
 class _HomePageServiceState extends State<HomePageService> {
-  final Stream<QuerySnapshot> _usersStreamPackage =
-      FirebaseFirestore.instance.collection('Service').where("Publishing",isEqualTo: "1").snapshots();
-       String name = "";
+  final Stream<QuerySnapshot> _usersStreamPackage = FirebaseFirestore.instance
+      .collection('Service')
+      .where("Publishing", isEqualTo: "1")
+      .snapshots();
+  String name = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         title: Container(
-            padding: EdgeInsets.all(10),
-            child: TextFormField(
-              onChanged: (value) {
-                setState(() {
-                  name = value;
-                });
-              },
-              decoration: InputDecoration(
-                hintText:" ابحث هنا",
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    borderSide: BorderSide(
-                        width: 3, color: Color(0xFF004079)
-                    )
-                ),
-                filled: true,
-                fillColor: Color(0xff838C96).withOpacity(0.5),
-                isDense: true,
-                contentPadding: EdgeInsets.all(10),
-
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    borderSide: BorderSide(
-                        width: 3, color: Color(0xFF004079)
-                    )
-
-                ),
-              ),
+        title: Container(
+          padding: EdgeInsets.all(10),
+          child: TextFormField(
+            onChanged: (value) {
+              setState(() {
+                name = value;
+              });
+            },
+            decoration: InputDecoration(
+              hintText: " ابحث هنا",
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderSide: BorderSide(width: 3, color: Color(0xFF004079))),
+              filled: true,
+              fillColor: Color(0xff838C96).withOpacity(0.5),
+              isDense: true,
+              contentPadding: EdgeInsets.all(10),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderSide: BorderSide(width: 3, color: Color(0xFF004079))),
             ),
           ),
+        ),
         backgroundColor: Color(0xFF004079),
         leading: IconButton(
           icon: Icon(Icons.search),
-          onPressed: () {
-          },
+          onPressed: () {},
           color: Colors.white,
         ),
-
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _usersStreamPackage,
@@ -89,9 +81,9 @@ class _HomePageServiceState extends State<HomePageService> {
               scrollDirection: Axis.vertical,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int i) {
-                   var data =
+                var data =
                     snapshot.data!.docs[i].data() as Map<String, dynamic>;
-                 if (name.isEmpty) {
+                if (name.isEmpty) {
                   return InkWell(
                     onTap: () {
                       Get.to(() => DetailsServiceForUser(
@@ -99,48 +91,49 @@ class _HomePageServiceState extends State<HomePageService> {
                             data: snapshot.data!.docs[i],
                           ));
                     },
-                  child: Container(
-                    margin: EdgeInsets.all(10),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.network(
-                              "${snapshot.data!.docs[i]["imageurl"]}",
-                              height: 250,
-                              width: 400,
-                              fit: BoxFit.cover,
-                            )),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15),bottomRight: Radius.circular(15)),
-
-                            child: Container(
-                              color: Color(0xFF869aaf).withOpacity(0.8),
-                              height: 65,
-                              padding: EdgeInsets.all(15),
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                "${snapshot.data!.docs[i]["name"]}",
-                                style: TextStyle(color: Colors.white, fontSize: 25),
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                "${snapshot.data!.docs[i]["imageurl"]}",
+                                height: 250,
+                                width: 400,
+                                fit: BoxFit.cover,
+                              )),
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15)),
+                              child: Container(
+                                color: Color(0xFF869aaf).withOpacity(0.8),
+                                height: 65,
+                                padding: EdgeInsets.all(15),
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  "${snapshot.data!.docs[i]["name"]}",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                ),
                               ),
-
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }
-              if (data['name']
-                      .toString()
-                      .toLowerCase()
-                      .startsWith(name.toLowerCase())) {
-                     return InkWell(
+                  );
+                }
+                if (data['name']
+                    .toString()
+                    .toLowerCase()
+                    .contains(name.toLowerCase())) {
+                  return InkWell(
                     onTap: () {
                       Get.to(() => DetailsServiceForUser(
                             ID_Doc: snapshot.data!.docs[i].id,
@@ -160,13 +153,14 @@ class _HomePageServiceState extends State<HomePageService> {
                                 fit: BoxFit.cover,
                               )
                           ),
-
                           Positioned(
                             bottom: 0,
                             left: 0,
                             right: 0,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15),bottomRight: Radius.circular(15)),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15)),
                               child: Container(
                                 color: Color(0xFF869aaf).withOpacity(0.8),
                                 height: 65,
@@ -174,8 +168,8 @@ class _HomePageServiceState extends State<HomePageService> {
                                 alignment: Alignment.bottomCenter,
                                 child: Text(
                                   "${snapshot.data!.docs[i]["name"]}",
-                                  style:
-                                      TextStyle(color: Colors.white, fontSize: 25),
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
                                 ),
                               ),
                             ),
@@ -184,15 +178,9 @@ class _HomePageServiceState extends State<HomePageService> {
                       ),
                     ),
                   );
-                  }    return Container();
-              
-              
-              
-              
-              
-              
-              
-        });
+                }
+                return Container();
+              });
         },
       ),
     );
