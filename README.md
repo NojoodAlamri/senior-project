@@ -1,20 +1,14 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Our application
+Baltmam is a mobile application that connects event planners with vendors so that the planners can find the vendors, sponsors, services, without any effort and waste of time.This project aims to develop an application that connects event organizers with service providers (vendors, sponsors) based on their correspond needs.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+# Aim
+This project aims to develop an application that connects event organizers 
+with service providers (vendors, sponsors) based on their correspond needs
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Objectives
+• To introduce the vendors and their services .
+• to introduce sponsors and contact with them .
+• To develop a method for booking services online .
+• To facilitate communication between event planners and vendors .
+• To design a database to save event planners, vendor and sponsor information
